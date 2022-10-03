@@ -1,0 +1,128 @@
+mysql> create database faculty;
+ERROR 1007 (HY000): Can't create database 'faculty'; database exists
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| cors               |
+| corse              |
+| course             |
+| department         |
+| emps               |
+| faculty            |
+| mysql              |
+| performance_schema |
+| stud               |
+| student            |
+| students           |
+| test               |
++--------------------+
+13 rows in set (0.00 sec)
+
+mysql> use faculty;
+Database changed
+mysql> create table faculty(faculty_identifier varchar(4),faculty_name varchar(15),gender varchar(5),date_of_birth int,date_of_join int,mobile_number int(10));
+ERROR 1050 (42S01): Table 'faculty' already exists
+mysql> use faculty;
+Database changed
+mysql>  create table faculty(faculty_identifier varchar(4),faculty_name varchar(15),gender varchar(5),date_of_birth int,date_of_join int,mobile_number int(10));
+ERROR 1050 (42S01): Table 'faculty' already exists
+mysql> create table faculty(faculty_identifier varchar(4),faculty_name varchar(15),gender varchar(5),date_of_birth int,date_of_join int,mobile_number int(10));
+ERROR 1050 (42S01): Table 'faculty' already exists
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| cors               |
+| corse              |
+| course             |
+| department         |
+| emps               |
+| faculty            |
+| mysql              |
+| performance_schema |
+| stud               |
+| student            |
+| students           |
+| test               |
++--------------------+
+13 rows in set (0.00 sec)
+
+mysql>  create table faculty(faculty_identifier varchar(4),faculty_name varchar(15),gender varchar(5),date_of_birth int,date_of_join int,mobile_number int(10));
+ERROR 1050 (42S01): Table 'faculty' already exists
+mysql> desc faculty;
++--------------+----------+------+-----+---------+-------+
+| Field        | Type     | Null | Key | Default | Extra |
++--------------+----------+------+-----+---------+-------+
+| faculty_ID   | char(4)  | YES  |     | NULL    |       |
+| faculty_name | char(15) | YES  |     | NULL    |       |
+| mobile_no    | int(9)   | YES  |     | NULL    |       |
++--------------+----------+------+-----+---------+-------+
+3 rows in set (0.02 sec)
+
+mysql> alter table faculty add primary key(faculty_id);
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc faculty;
++--------------+----------+------+-----+---------+-------+
+| Field        | Type     | Null | Key | Default | Extra |
++--------------+----------+------+-----+---------+-------+
+| faculty_ID   | char(4)  | NO   | PRI |         |       |
+| faculty_name | char(15) | YES  |     | NULL    |       |
+| mobile_no    | int(9)   | YES  |     | NULL    |       |
++--------------+----------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table faculty;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> drop column faculty_name;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'column faculty_name' at line 1
+mysql> alter table faculty drop faculty_name;
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc faculty;
++------------+---------+------+-----+---------+-------+
+| Field      | Type    | Null | Key | Default | Extra |
++------------+---------+------+-----+---------+-------+
+| faculty_ID | char(4) | NO   | PRI |         |       |
+| mobile_no  | int(9)  | YES  |     | NULL    |       |
++------------+---------+------+-----+---------+-------+
+2 rows in set (0.01 sec)
+
+mysql> alter table faculty modify mobile_number int not null;
+ERROR 1054 (42S22): Unknown column 'mobile_number' in 'faculty'
+mysql> alter table faculty modify mobile_no int not null;
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc faculty;
++------------+---------+------+-----+---------+-------+
+| Field      | Type    | Null | Key | Default | Extra |
++------------+---------+------+-----+---------+-------+
+| faculty_ID | char(4) | NO   | PRI |         |       |
+| mobile_no  | int(11) | NO   |     | NULL    |       |
++------------+---------+------+-----+---------+-------+
+2 rows in set (0.02 sec)
+
+mysql> alter table faculty add column faculty_id char(4);
+ERROR 1060 (42S21): Duplicate column name 'faculty_id'
+mysql> alter table faculty add column faculty_ID char(4);
+ERROR 1060 (42S21): Duplicate column name 'faculty_ID'
+mysql> alter table faculty add column faculty_name char(15);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc faculty;
++--------------+----------+------+-----+---------+-------+
+| Field        | Type     | Null | Key | Default | Extra |
++--------------+----------+------+-----+---------+-------+
+| faculty_ID   | char(4)  | NO   | PRI |         |       |
+| mobile_no    | int(11)  | NO   |     | NULL    |       |
+| faculty_name | char(15) | YES  |     | NULL    |       |
++--------------+----------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
