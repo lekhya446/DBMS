@@ -1,0 +1,46 @@
+
+mysql> select count(product_no),cost from product group by cost having count(product_no)>5;
+ERROR 1054 (42S22): Unknown column 'cost' in 'field list'
+mysql> select product_cost,count(product_cost)from product group by product_cost;
++--------------+---------------------+
+| product_cost | count(product_cost) |
++--------------+---------------------+
+|           20 |                   1 |
+|           40 |                   1 |
+|           50 |                   1 |
+|           60 |                   1 |
+|           75 |                   1 |
++--------------+---------------------+
+5 rows in set (0.01 sec)
+
+mysql> product_no,product_company from product order by product_rate;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'product_no,product_company from product order by product_rate' at line 1
+mysql> product_no,product_company from product order by product_rate;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'product_no,product_company from product order by product_rate' at line 1
+mysql> select product_no,product_company from product order by product_rate;
++------------+-----------------+
+| product_no | product_company |
++------------+-----------------+
+|          1 |              10 |
+|          4 |               8 |
+|          5 |               9 |
+|          2 |               9 |
+|          3 |              10 |
++------------+-----------------+
+5 rows in set (0.00 sec)
+
+mysql> select product_n0,product_company,product_qty,product_rate,product_cost from product group by product-cost havimg count(product_cost)>=50;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'havimg count(product_cost)>=50' at line 1
+mysql> select product_n0,product_company,product_qty,product_rate,product_cost from product group by product-cost having count(product_cost)>=50;
+ERROR 1054 (42S22): Unknown column 'product_n0' in 'field list'
+mysql> select product_no,product_company,product_qty,product_rate,product_cost from product group by product-cost having count(product_cost)>=50;
+ERROR 1054 (42S22): Unknown column 'product' in 'group statement'
+mysql> select product_no from product where product_rate>25 group by product_n0,product_rate having sum(product_rate)<100;
+ERROR 1054 (42S22): Unknown column 'product_n0' in 'group statement'
+mysql> select product_no from product where product_rate>25 group by product_no,product_rate having sum(product_rate)<100;
++------------+
+| product_no |
++------------+
+|          3 |
++------------+
+1 row in set (0.01 sec)
