@@ -1,0 +1,143 @@
+
+mysql> create table book;
+ERROR 1046 (3D000): No database selected
+mysql> create database book;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| book               |
+| cors               |
+| corse              |
+| course             |
+| dbtest2            |
+| department         |
+| employee           |
+| emps               |
+| faculty            |
+| mysql              |
+| performance_schema |
+| product            |
+| stud               |
+| student            |
+| students           |
+| test               |
++--------------------+
+17 rows in set (0.00 sec)
+
+mysql> use book;
+Database changed
+mysql> create table book(publisher_name varchar(10),book_name varchar(200,written_by varchar(23),cost int(12));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'written_by varchar(23),cost int(12))' at line 1
+mysql> create table book(publisher_name varchar(10),book_name varchar(20),written_by varchar(23),cost int(12));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc book;
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| publisher_name | varchar(10) | YES  |     | NULL    |       |
+| book_name      | varchar(20) | YES  |     | NULL    |       |
+| written_by     | varchar(23) | YES  |     | NULL    |       |
+| cost           | int(12)     | YES  |     | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> alter table book add primary key(publisher_name);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc book;
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| publisher_name | varchar(10) | NO   | PRI |         |       |
+| book_name      | varchar(20) | YES  |     | NULL    |       |
+| written_by     | varchar(23) | YES  |     | NULL    |       |
+| cost           | int(12)     | YES  |     | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+4 rows in set (0.02 sec)
+
+mysql> insert into book values('the jungle','harry potter','the monk',500);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into book values('call of the wild','you can win','the fish',550);
+ERROR 1406 (22001): Data too long for column 'publisher_name' at row 1
+mysql> insert into book values('the wild','you can win','the fish',550);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into book values('the penguin','the tiger','the lion',600);
+ERROR 1406 (22001): Data too long for column 'publisher_name' at row 1
+mysql> insert into book values('penguin','the tiger','the lion',600);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into the book values('roli','rupa',900);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'book values('roli','rupa',900)' at line 1
+mysql> insert into the book values('the penguin','thegodofsmallthings','rupa',900);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'book values('the penguin','thegodofsmallthings','rupa',900)' at line 1
+mysql> insert into the book values('the penguin','thewestland','rupa',900);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'book values('the penguin','thewestland','rupa',900)' at line 1
+mysql> insert into the book values(' penguin','thewestland','rupa',900);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'book values(' penguin','thewestland','rupa',900)' at line 1
+mysql> insert into the book values('penguin','thegodofsmallthings','poorna',900);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'book values('penguin','thegodofsmallthings','poorna',900)' at line 1
+mysql> insert into book values('penguin','thegodofsmallthings','kiran',500);
+ERROR 1062 (23000): Duplicate entry 'penguin' for key 'PRIMARY'
+mysql> insert into book values('jungle','thegodofsmallthings','kiran',500);
+Query OK, 1 row affected (0.01 sec)
+
+mysql>   insert into book values('roli','knight','pramod',300);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into book values('rupa','harpercollins','arvind',400);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select*from book;
++----------------+---------------------+------------+------+
+| publisher_name | book_name           | written_by | cost |
++----------------+---------------------+------------+------+
+| jungle         | thegodofsmallthings | kiran      |  500 |
+| penguin        | the tiger           | the lion   |  600 |
+| roli           | knight              | pramod     |  300 |
+| rupa           | harpercollins       | arvind     |  400 |
+| the jungle     | harry potter        | the monk   |  500 |
+| the wild       | you can win         | the fish   |  550 |
++----------------+---------------------+------------+------+
+6 rows in set (0.00 sec)
+
+mysql>  select publisher_name from book where cost<=300;
++----------------+
+| publisher_name |
++----------------+
+| roli           |
++----------------+
+1 row in set (0.02 sec)
+
+mysql>  select count(*) from book;where cost>=550;
++----------+
+| count(*) |
++----------+
+|        6 |
++----------+
+1 row in set (0.01 sec)
+
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where cost>=550' at line 1
+mysql> alter table book add constraint book_name_unique unique(cost);
+ERROR 1062 (23000): Duplicate entry '500' for key 'book_name_unique'
+mysql> alter table book add constraint publisher_name_unique unique(cost);
+ERROR 1062 (23000): Duplicate entry '500' for key 'publisher_name_unique'
+mysql> alter table book add constraint cost_unique unique(cost);
+ERROR 1062 (23000): Duplicate entry '500' for key 'cost_unique'
+mysql> desc book;
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| publisher_name | varchar(10) | NO   | PRI |         |       |
+| book_name      | varchar(20) | YES  |     | NULL    |       |
+| written_by     | varchar(23) | YES  |     | NULL    |       |
+| cost           | int(12)     | YES  |     | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+4 rows in set (0.02 sec)
