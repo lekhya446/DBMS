@@ -1,0 +1,66 @@
+
+mysql> \c
+mysql> create database hospital;
+ERROR 1007 (HY000): Can't create database 'hospital'; database exists
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| book               |
+| cors               |
+| corse              |
+| course             |
+| dbtest2            |
+| department         |
+| employee           |
+| emps               |
+| faculty            |
+| hospital           |
+| mysql              |
+| performance_schema |
+| product            |
+| stud               |
+| student            |
+| students           |
+| test               |
++--------------------+
+18 rows in set (0.00 sec)
+
+mysql> use hospital;
+Database changed
+mysql>  create table hospital(pno int,pname varchar(15),admitdate date,ischarge date);
+ERROR 1050 (42S01): Table 'hospital' already exists
+mysql> insert into hospital values(1,'ajith','2014-12-03','2014-12-03');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into hospital values(2,'ramu','2017-02-28','2015-05-08');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into hospital values(3,'krishna','2019-05-05','2018-06-14');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select*from hospital;
++------+---------+------------+------------+
+| pno  | pname   | admitdate  | ischarge   |
++------+---------+------------+------------+
+|    1 | hari    | 1983-06-12 | 1983-06-12 |
+|    3 | patlu   | 1997-06-14 | 1997-06-14 |
+|    1 | ajith   | 2014-12-03 | 2014-12-03 |
+|    2 | ramu    | 2017-02-28 | 2015-05-08 |
+|    3 | krishna | 2019-05-05 | 2018-06-14 |
++------+---------+------------+------------+
+5 rows in set (0.00 sec)
+
+mysql> delete from hospital where pno=1;
+Query OK, 2 rows affected (0.02 sec)
+
+mysql> select*from hospital;
++------+---------+------------+------------+
+| pno  | pname   | admitdate  | ischarge   |
++------+---------+------------+------------+
+|    3 | patlu   | 1997-06-14 | 1997-06-14 |
+|    2 | ramu    | 2017-02-28 | 2015-05-08 |
+|    3 | krishna | 2019-05-05 | 2018-06-14 |
++------+---------+------------+------------+
+3 rows in set (0.00 sec)
