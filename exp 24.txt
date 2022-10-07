@@ -1,0 +1,74 @@
+
+mysql> \c
+mysql> create database car;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| book               |
+| car                |
+| cors               |
+| corse              |
+| course             |
+| dbtest2            |
+| department         |
+| employee           |
+| emps               |
+| faculty            |
+| hospital           |
+| mysql              |
+| performance_schema |
+| product            |
+| stud               |
+| student            |
+| students           |
+| test               |
++--------------------+
+19 rows in set (0.00 sec)
+
+mysql> use car;
+Database changed
+mysql> create table car(carno int,carname varchar913),dor date,returndate date);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'varchar913),dor date,returndate date)' at line 1
+mysql> create table car(carno int,carname varchar(13),dor date,returndate date);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc car;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| carno      | int(11)     | YES  |     | NULL    |       |
+| carname    | varchar(13) | YES  |     | NULL    |       |
+| dor        | date        | YES  |     | NULL    |       |
+| returndate | date        | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+4 rows in set (0.02 sec)
+
+mysql> insert into car values(1,'bmw','1994-12-10','1994-12-10'),(2,'audi','1996-12-05','1996-12-05'),(3,'toyato','2004-06-01'),(4,'benz','2003-09-08','2003-09-08');
+ERROR 1136 (21S01): Column count doesn't match value count at row 3
+mysql> insert into car values(1,'bmw','1994-12-10','1994-12-10'),(2,'audi','1996-12-05','1996-12-05'),(3,'toyato','2004-06-01','2004-06-01'),(4,'benz','2003-09-08','2003-09-08');
+Query OK, 4 rows affected (0.01 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select*from car;
++-------+---------+------------+------------+
+| carno | carname | dor        | returndate |
++-------+---------+------------+------------+
+|     1 | bmw     | 1994-12-10 | 1994-12-10 |
+|     2 | audi    | 1996-12-05 | 1996-12-05 |
+|     3 | toyato  | 2004-06-01 | 2004-06-01 |
+|     4 | benz    | 2003-09-08 | 2003-09-08 |
++-------+---------+------------+------------+
+4 rows in set (0.00 sec)
+
+mysql> select carname,dor,returndate from car where carno<3;
++---------+------------+------------+
+| carname | dor        | returndate |
++---------+------------+------------+
+| bmw     | 1994-12-10 | 1994-12-10 |
+| audi    | 1996-12-05 | 1996-12-05 |
++---------+------------+------------+
+2 rows in set (0.00 sec)
